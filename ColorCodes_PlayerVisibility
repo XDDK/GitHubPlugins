@@ -1,0 +1,26 @@
+!!ATTENTION!! This is just for the 'displayName'
+The color codes for the player visibility plugin:
+================================================
+=  &0  = ChatColor.BLACK;                      =
+=  &1  = ChatColor.DARK_BLUE;                  =
+=  &2  = ChatColor.DARK_GREEN;                 =
+=  &3  = ChatColor.DARK_AQUA;                  =
+=  &4  = ChatColor.DARK_RED;                   =
+=  &5  = ChatColor.DARK_PURPLE;                =
+=  &6  = ChatColor.GOLD;                       =
+=  &7  = ChatColor.GRAY;                       =
+=  &8  = ChatColor.DARK_GRAY;                  =
+=  &9  = ChatColor.BLUE;                       =
+=  &10 = ChatColor.GREEN;                      =
+=  &11 = ChatColor.AQUA;                       =
+=  &12 = ChatColor.RED;                        =
+=  &13 = ChatColor.LIGHT_PURPLE;               =
+=  &14 = ChatColor.YELLOW;                     =
+=  &15 = ChatColor.WHITE;                      =
+=  &16 = ChatColor.MAGIC;                      =
+=  &17 = ChatColor.BOLD;                       =
+=  &18 = ChatColor.STRIKETHROUGH;              =
+=  &19 = ChatColor.UNDERLINE;                  =
+=  &20 = ChatColor.ITALIC;                     =
+=  &21 = ChatColor.RESET;                      =
+================================================
