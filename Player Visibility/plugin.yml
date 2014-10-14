@@ -1,0 +1,34 @@
+name: PlayerVisibility
+main: eu.playervisibility.main.PlayerVisibility
+version: 1.2.6 Release
+description: >
+             Acest plugin activeaza/dezactiveaza Vizibilitatea jucatorilor.
+commands:
+    pv:
+        description: Show the help of Player Visibility.
+        aliases: [playervisibility]
+        usage:  |
+             /pv[hide,show,tool,help] - fara spatii
+    pvhelp:
+        description: Show the help of Player Visibility.
+        aliases: [playervisibilityhelp]
+        usage:  |
+             Version of the plugin is 1.2.6 Release
+    pvhide:
+        aliases: [playervisibilityhide]
+        description: Hide all the players.
+    pvshow:
+        aliases: [playervisibilityshow]
+        description: Show all the players.
+    pvtoolon:
+        aliases: [playervisibilitytoolon]
+        description: Give to the player the magic tool.
+    pvtooloff:
+        aliases: [playervisibilitytooloff]
+        description: Give to the player the magic tool.
+    pvenable:
+        description: Activeaza plugin-ul.
+    pvdisable:
+        description: Dezactiveaza plugin-ul.
+    pvreload:
+        description: Reincarca plugin-ul.

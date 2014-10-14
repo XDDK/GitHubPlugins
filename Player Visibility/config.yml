@@ -1,0 +1,17 @@
+#Config for Player Visibility by 1Tudor1
+#The materials can be found here: http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html
+#The color code is a bit different just on 'displayName'
+#You can get the colors like here: https://github.com/1Tudor1/GitHubPlugins/blob/master/ColorCodes_PlayerVisibility
+PlayerVisibility:
+  itemMaterialON: REDSTONE_TORCH_ON
+  itemMaterialOFF: LEVER
+  amount: 1
+  shrt: 0
+  timeDelay: 5
+  displayNameON: '&2Players &7>> &2Enabled'
+  displayNameOFF: '&2Players &7>> &4Disabled'
+messages:
+  visibilityActivated: '&8[&eVisibility&8] You have toggled player visibility: &2on'
+  visibilityDeactivated: '&8[&eVisibility&8] You have toggled player visibility: &4off'
+  timerMessage: '&ePlease wait 5 seconds before using the Torch!'
+  noPermMessage: "&cYou don't have the permission to use the torch!"
