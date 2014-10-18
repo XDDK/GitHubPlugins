@@ -1,6 +1,6 @@
 name: PlayerVisibility
 main: eu.playervisibility.main.PlayerVisibility
-version: 1.2.13 Release
+version: 1.2.14 Release
 description: >
              Acest plugin activeaza/dezactiveaza Vizibilitatea jucatorilor.
 commands:
@@ -13,7 +13,7 @@ commands:
         description: Show the help of Player Visibility.
         aliases: [playervisibilityhelp]
         usage:  |
-             Version of the plugin is 1.2.13 Release
+             Version of the plugin is 1.2.14 Release
     pvhide:
         aliases: [playervisibilityhide]
         description: Hide all the players.
