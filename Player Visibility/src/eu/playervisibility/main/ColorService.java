@@ -15,7 +15,6 @@ public class ColorService {
 		if(debug){
 			System.out.println("[DEBUG] PROPRIETATE DE MODIFICAT A.I. SA ARATE CULORILE NICE: " + configProperty);
 		}
-		
 		Map<String, ChatColor>literaCifraCuloare = new HashMap<String, ChatColor>();
 		literaCifraCuloare.put("0", ChatColor.BLACK);
 		literaCifraCuloare.put("1", ChatColor.DARK_BLUE);
