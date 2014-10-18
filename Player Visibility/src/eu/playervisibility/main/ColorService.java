@@ -34,6 +34,7 @@ public class ColorService {
 		literaCifraCuloare.put("e",  ChatColor.YELLOW);
 		literaCifraCuloare.put("f",  ChatColor.WHITE);
 		// add effects
+		
 		literaCifraCuloare.put("k",  ChatColor.MAGIC);
 		literaCifraCuloare.put("l",  ChatColor.BOLD);
 		literaCifraCuloare.put("m",  ChatColor.STRIKETHROUGH);
