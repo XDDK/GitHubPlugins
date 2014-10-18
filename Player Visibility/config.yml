@@ -2,6 +2,7 @@
 #The materials can be found here: http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html
 #The color code is a bit different just on 'displayName'
 #You can get the colors like here: https://github.com/1Tudor1/GitHubPlugins/blob/master/ColorCodes_PlayerVisibility
+# %timeDelay% is replaced with the time left to the next click
 PlayerVisibility:
   itemMaterialON: REDSTONE_TORCH_ON
   itemMaterialOFF: LEVER
@@ -13,5 +14,5 @@ PlayerVisibility:
 messages:
   visibilityActivated: '&8[&eVisibility&8] You have toggled player visibility: &2on'
   visibilityDeactivated: '&8[&eVisibility&8] You have toggled player visibility: &4off'
-  timerMessage: '&ePlease wait 5 seconds before using the Torch!'
+  timerMessage: '&ePlease wait %timeDelay% seconds before using the Torch!'
   noPermMessage: "&cYou don't have the permission to use the torch!"

@@ -144,10 +144,56 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		}
 		if(label.equalsIgnoreCase("pvreload")){
 			if (player.hasPermission("pv.reload") || player.isOp()) {
+				this.reloadConfig();
 			    System.out.println(ChatColor.GREEN + "Configuarion reloaded!");
 			    player.sendMessage(ChatColor.GREEN + "Configuarion reloaded!");
 			}
+		}/*
+		if(label.equalsIgnoreCase("setdisplaynameon")){
+			if(player.hasPermission("pv.setdisplaynameon") || player.isOp()){
+		        String msgOld = args[0];
+				this.getConfig().set("PlayerVisibility.displayNameON", msgOld);
+				this.saveConfig();
+				String msg = getConfig().getString("PlayerVisibility.displayNameON");
+				player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+			}
 		}
+		if(label.equalsIgnoreCase("setdisplaynameoff")){
+			if(player.hasPermission("pv.setdisplaynameoff") || player.isOp()){
+		        String msgOld = args[0];
+				this.getConfig().set("PlayerVisibility.displayNameOFF", msgOld);
+				this.saveConfig();
+				String msg = getConfig().getString("PlayerVisibility.displayNameOFF");
+				player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+			}
+		}
+		if(label.equalsIgnoreCase("setmessage")){
+			if(player.hasPermission("pv.setmessage") || player.isOp()){
+				String typeOfMessage = args[0];
+		        String msgOld = args[1];
+				if(typeOfMessage.equals("visibilityactivated")){
+					this.getConfig().set("messages.visibilityActivated", msgOld);
+					this.saveConfig();
+					String msg = getConfig().getString("messages.visibilityActivated");
+					player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+				} else if(typeOfMessage.equals("visibilitydeactivated")){
+					this.getConfig().set("messages.visibilityDeactivated", msgOld);
+					this.saveConfig();
+					String msg = getConfig().getString("messages.visibilityDeactivated");
+					player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+				} else if(typeOfMessage.equals("timermessage")){
+					this.getConfig().set("messages.timerMessage", msgOld);
+					this.saveConfig();
+					String msg = getConfig().getString("messages.timerMessage");
+					player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+				} else if(typeOfMessage.equals("nopermmessage")){
+					this.getConfig().set("messages.noPermMessage", msgOld);
+					this.saveConfig();
+					String msg = getConfig().getString("messages.noPermMessage");
+					player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+				}
+			}
+		}*/
 
 		return false;
 	}
@@ -177,8 +223,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 
 	public void asteptare(Player player, boolean hide) {
 		if (intervaleAsteptateDeCatreJucatori.containsKey(player.getName())) {
-			long atunci = intervaleAsteptateDeCatreJucatori.get(player
-					.getName());
+			long atunci = intervaleAsteptateDeCatreJucatori.get(player.getName());
 			Date dataDeAcum = new Date();
 			long acum = dataDeAcum.getTime();
 			int timeDelay = getConfig().getInt("PlayerVisibility.timeDelay") * 1000;
@@ -190,7 +235,9 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 
 				intervaleAsteptateDeCatreJucatori.put(player.getName(), acum);
 			} else if ((acum - atunci) < timeDelay) {
-				player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("messages.timerMessage")));
+				String message = getConfig().getString("messages.timerMessage");
+				String timeLeftDelay = String.valueOf(timeDelay/1000);
+				player.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("%timeDelay%", timeLeftDelay)));
 			}
 		} else {
 			Date acum = new Date();

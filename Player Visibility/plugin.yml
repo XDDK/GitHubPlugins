@@ -1,19 +1,19 @@
 name: PlayerVisibility
 main: eu.playervisibility.main.PlayerVisibility
-version: 1.2.14 Release
+version: 1.2.15 Release
 description: >
-             Acest plugin activeaza/dezactiveaza Vizibilitatea jucatorilor.
+             This plugin enables/disables player visibility in the hub server.
 commands:
     pv:
         description: Show the help of Player Visibility.
         aliases: [playervisibility]
         usage:  |
-             /pv[hide,show,tool,help] - fara spatii
-    pvhelp:
+             /pv[hide,show,toolon/off,version,enable,disable,reload]
+    pvversion:
         description: Show the help of Player Visibility.
-        aliases: [playervisibilityhelp]
+        aliases: [playervisibilityversion]
         usage:  |
-             Version of the plugin is 1.2.14 Release
+             Version of the plugin is 1.2.15 Release
     pvhide:
         aliases: [playervisibilityhide]
         description: Hide all the players.
@@ -22,13 +22,22 @@ commands:
         description: Show all the players.
     pvtoolon:
         aliases: [playervisibilitytoolon]
-        description: Give to the player the magic tool.
+        description: Give to the player the magic tool on.
     pvtooloff:
         aliases: [playervisibilitytooloff]
-        description: Give to the player the magic tool.
+        description: Give to the player the magic tool off.
     pvenable:
-        description: Activeaza plugin-ul.
+        description: Activate the plugin.
     pvdisable:
-        description: Dezactiveaza plugin-ul.
+        description: Deactivate the plugin.
     pvreload:
-        description: Reincarca plugin-ul.
+        description: Reload the plugin.
+    setdisplaynameon:
+        aliases: [setdpon, setdisplayon]
+        description: Sets a new displayname when the torch is on.
+    setdisplaynameoff:
+        aliases: [setdpoff, setdisplayoff]
+        description: Sets a new displayname when the torch is off.
+    setmessage:
+        aliases: [setm, setmsg]
+        description: Sets a new message on any message of the plugin.
