@@ -1,9 +1,9 @@
 package eu.playervisibility.main;
 
-/*import java.util.Arrays;*/
 import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
+/*import java.util.Arrays;*/
 /*import java.util.List;*/
 import java.util.Map;
 import java.util.logging.Logger;
@@ -148,7 +148,9 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 			    System.out.println(ChatColor.GREEN + "Configuarion reloaded!");
 			    player.sendMessage(ChatColor.GREEN + "Configuarion reloaded!");
 			}
-		}/*
+		}
+		// TODO - Set the displayname and the messages in game
+		/*
 		if(label.equalsIgnoreCase("setdisplaynameon")){
 			if(player.hasPermission("pv.setdisplaynameon") || player.isOp()){
 		        String msgOld = args[0];
@@ -280,7 +282,6 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 	}
 	
 	//EVENTS
-
 	@EventHandler
 	public void onPickupEvent(PlayerPickupItemEvent event) {
 
