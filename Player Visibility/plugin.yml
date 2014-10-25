@@ -1,8 +1,9 @@
 name: PlayerVisibility
 main: eu.playervisibility.main.PlayerVisibility
-version: 1.2.15 Release
-description: >
-             This plugin enables/disables player visibility in the hub server.
+version: 1.2.16 Release
+description: This plugin enables/disables player visibility in the hub server.
+author: 1Tudor1
+website: http://dev.bukkit.org/bukkit-plugins/player-visibilitytoggle/
 commands:
     pv:
         description: Show the help of Player Visibility.
@@ -13,7 +14,7 @@ commands:
         description: Show the help of Player Visibility.
         aliases: [playervisibilityversion]
         usage:  |
-             Version of the plugin is 1.2.15 Release
+             Version of the plugin is 1.2.16 Release
     pvhide:
         aliases: [playervisibilityhide]
         description: Hide all the players.
@@ -41,3 +42,14 @@ commands:
     setmessage:
         aliases: [setm, setmsg]
         description: Sets a new message on any message of the plugin.
+permissions:
+  pv.*:
+    description: Gives access to all PlayerVisbility commands
+    children:
+      pv.enable: true
+      pv.disable: true
+      pv.hide: true
+      pv.show: true
+      pv.toolon: true
+      pv.tooloff: true
+      pv.reload: true

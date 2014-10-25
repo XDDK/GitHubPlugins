@@ -92,6 +92,22 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		}
 	}
 
+	public static String stringFromArguments(String[] argumente, int inceput, int numarArgumenteMinim, Player player) throws InsufficientArgumentsException{
+		StringBuilder sb = new StringBuilder();
+	
+		if(argumente.length < numarArgumenteMinim){
+			throw new InsufficientArgumentsException();
+		}else{
+		
+			for (int i = inceput; i < argumente.length; i++){
+				sb.append(argumente[i]);
+				sb.append(" ");
+			}
+		}
+		return sb.toString().trim();
+		
+	}
+	
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (!(sender instanceof Player)) {
 			sender.sendMessage(ChatColor.DARK_RED + "You can only do this as a player!");
@@ -145,58 +161,79 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		if(label.equalsIgnoreCase("pvreload")){
 			if (player.hasPermission("pv.reload") || player.isOp()) {
 				this.reloadConfig();
+				this.saveConfig();
 			    System.out.println(ChatColor.GREEN + "Configuarion reloaded!");
 			    player.sendMessage(ChatColor.GREEN + "Configuarion reloaded!");
 			}
 		}
-		// TODO - Set the displayname and the messages in game
-		/*
 		if(label.equalsIgnoreCase("setdisplaynameon")){
 			if(player.hasPermission("pv.setdisplaynameon") || player.isOp()){
-		        String msgOld = args[0];
-				this.getConfig().set("PlayerVisibility.displayNameON", msgOld);
-				this.saveConfig();
-				String msg = getConfig().getString("PlayerVisibility.displayNameON");
-				player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+				try {
+					this.getConfig().set("PlayerVisibility.displayNameON", stringFromArguments(args, 0, 1, player));
+					this.saveConfig();
+					String msg = getConfig().getString("PlayerVisibility.displayNameON");
+					player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+				} catch (InsufficientArgumentsException e) {
+					player.sendMessage(ChatColor.DARK_RED + "You can't set an invalid message!");
+				}
 			}
 		}
 		if(label.equalsIgnoreCase("setdisplaynameoff")){
 			if(player.hasPermission("pv.setdisplaynameoff") || player.isOp()){
-		        String msgOld = args[0];
-				this.getConfig().set("PlayerVisibility.displayNameOFF", msgOld);
-				this.saveConfig();
-				String msg = getConfig().getString("PlayerVisibility.displayNameOFF");
-				player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+				try {
+					this.getConfig().set("PlayerVisibility.displayNameOFF", stringFromArguments(args, 0, 1, player));
+					this.saveConfig();
+					String msg = getConfig().getString("PlayerVisibility.displayNameOFF");
+					player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+				} catch (InsufficientArgumentsException e) {
+					player.sendMessage(ChatColor.DARK_RED + "You can't set an invalid message!");
+				}
 			}
 		}
 		if(label.equalsIgnoreCase("setmessage")){
 			if(player.hasPermission("pv.setmessage") || player.isOp()){
 				String typeOfMessage = args[0];
-		        String msgOld = args[1];
 				if(typeOfMessage.equals("visibilityactivated")){
-					this.getConfig().set("messages.visibilityActivated", msgOld);
-					this.saveConfig();
-					String msg = getConfig().getString("messages.visibilityActivated");
-					player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
-				} else if(typeOfMessage.equals("visibilitydeactivated")){
-					this.getConfig().set("messages.visibilityDeactivated", msgOld);
-					this.saveConfig();
-					String msg = getConfig().getString("messages.visibilityDeactivated");
-					player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
-				} else if(typeOfMessage.equals("timermessage")){
-					this.getConfig().set("messages.timerMessage", msgOld);
-					this.saveConfig();
-					String msg = getConfig().getString("messages.timerMessage");
-					player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
-				} else if(typeOfMessage.equals("nopermmessage")){
-					this.getConfig().set("messages.noPermMessage", msgOld);
-					this.saveConfig();
-					String msg = getConfig().getString("messages.noPermMessage");
-					player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+					try {
+						this.getConfig().set("messages.visibilityActivated", stringFromArguments(args, 1, 2, player));
+						this.saveConfig();
+						String msg = getConfig().getString("messages.visibilityActivated");
+						player.sendMessage(ChatColor.BLUE + "Message set: "+ ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+					} catch (InsufficientArgumentsException e) {
+						player.sendMessage(ChatColor.DARK_RED + "You can't set an invalid message!");
+					}
+				} else if (typeOfMessage.equals("visibilitydeactivated")) {
+					try {
+						this.getConfig().set("messages.visibilityDeactivated", stringFromArguments(args, 1, 2, player));
+						this.saveConfig();
+						String msg = getConfig().getString("messages.visibilityDeactivated");
+						player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+					} catch (InsufficientArgumentsException e) {
+						player.sendMessage(ChatColor.DARK_RED + "You can't set an invalid message!");
+					}
+				} else if (typeOfMessage.equals("timermessage")) {
+					try {
+						this.getConfig().set("messages.timerMessage", stringFromArguments(args, 1, 2, player));
+						this.saveConfig();
+						String msg = getConfig().getString("messages.timerMessage");
+						player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+					} catch (InsufficientArgumentsException e) {
+						player.sendMessage(ChatColor.DARK_RED + "You can't set an invalid message!");
+					}
+				} else if (typeOfMessage.equals("nopermmessage")) {
+					try {
+						this.getConfig().set("messages.noPermMessage", stringFromArguments(args, 1, 2, player));
+						this.saveConfig();
+						String msg = getConfig().getString("messages.noPermMessage");
+						player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+					} catch (InsufficientArgumentsException e) {
+						player.sendMessage(ChatColor.DARK_RED + "You can't set an invalid message!");
+					}
+				} else {
+					player.sendMessage(ChatColor.RED + "You typed incorrect the type of the message!");
 				}
 			}
-		}*/
-
+		}
 		return false;
 	}
 
