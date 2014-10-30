@@ -53,3 +53,60 @@ permissions:
       pv.toolon: true
       pv.tooloff: true
       pv.reload: true
+      pv.setdisplaynameon: true
+      pv.setdisplaynameoff: true
+      pv.setmessage: true
+      pv.torch.hide: true
+      pv.torch.show: true
+      pv.byepass: true
+      pv.pick: true
+      pv.drop: true
+      pv.break: true
+  pv.enable:
+    description: You can enable the plugin.
+    default: op
+  pv.disable:
+    description: You can disable the plugin.
+    default: op
+  pv.hide:
+    description: You can hide the players with command.
+    default: true
+  pv.show:
+    description: You can show the players with command.
+    default: true
+  pv.toolon:
+    description: You get the tool for shown players.
+    default: op
+  pv.tooloff:
+    description: You get the tool for hidden players.
+    default: op
+  pv.reload:
+    description: You cand reload the plugin config.
+    default: op
+  pv.setdisplaynameon:
+    description: Set the display name for the toggleon item.
+    default: op
+  pv.setdisplaynameoff:
+    description: Set the disaplay name for the toggleoff item.
+    default: op
+  pv.setmessage:
+    description: Set any message of the plugin.
+    default: op
+  pv.torch.use:
+    description: Allow the player to use the torch.
+    default: true
+    children:
+      pv.torch.hide: true
+      pv.torch.show: true
+  pv.byepass:
+    description: Players byepasses the time between clicks.
+    default: false
+  pv.pick:
+    description: Player can pickup items in the hub.
+    default: true
+  pv.drop:
+    description: Player can drop items in the hub.
+    default: true
+  pv.break:
+    description: Player can break blocks in the hub.
+    default: true
