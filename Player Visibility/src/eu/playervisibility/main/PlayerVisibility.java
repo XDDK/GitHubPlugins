@@ -363,7 +363,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		Player player = event.getPlayer();
 		if (!(player.isOp() || player.hasPermission("pv.place"))) {
 			event.setCancelled(true);
-		} else{
+		} else {
 			
 		}
 	}
