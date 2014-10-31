@@ -19,6 +19,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -50,7 +51,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 	
 	@Override
 	public void onDisable() {
-
+		loadConfig();
 	}
 	
     public void loadConfig()
@@ -323,9 +324,11 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 	public void onPickupEvent(PlayerPickupItemEvent event) {
 
 		Player player = event.getPlayer();
-		if (!player.isOp() || !player.hasPermission("pv.pick")) {
+		if (!(player.isOp() || player.hasPermission("pv.pick"))) {
 			event.setCancelled(true);
 			player.sendMessage(ChatColor.YELLOW + "You are not permitted to pickup items!");
+		} else {
+			
 		}
 
 	}
@@ -334,9 +337,11 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 	public void onDropEvent(PlayerDropItemEvent event) {
 
 		Player player = event.getPlayer();
-		if (!player.isOp() || !player.hasPermission("pv.drop")) {
+		if (!(player.isOp() || player.hasPermission("pv.drop"))) {
 			event.setCancelled(true);
 			player.sendMessage(ChatColor.YELLOW + "You are not permitted to drop items!");
+		} else {
+			
 		}
 
 	}
@@ -345,8 +350,21 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 	public void onBlockBreak(BlockBreakEvent event) {
 
 		Player player = event.getPlayer();
-		if (!player.isOp() || !player.hasPermission("pv.break")) {
+		if (!(player.isOp() || player.hasPermission("pv.break"))) {
 			event.setCancelled(true);
+		} else {
+			
+		}
+	}
+	
+	@EventHandler
+	public void onBlockPlace(BlockPlaceEvent event){
+		
+		Player player = event.getPlayer();
+		if (!(player.isOp() || player.hasPermission("pv.place"))) {
+			event.setCancelled(true);
+		} else {
+			
 		}
 	}
 }

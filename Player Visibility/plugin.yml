@@ -9,10 +9,12 @@ commands:
         description: Show the help of Player Visibility.
         aliases: [playervisibility]
         usage:  |
-             /pv[hide,show,toolon/off,version,enable,disable,reload]
+             /<command> <parameters>
     pvversion:
         description: Show the help of Player Visibility.
-        aliases: [playervisibilityversion]
+        aliases: [playervisibilityversion, pvver]
+        permission: pv.version
+        permission-message: You do not have permission <permission>
         usage:  |
              Version of the plugin is 1.2.16 Release
     pvhide:
@@ -62,6 +64,29 @@ permissions:
       pv.pick: true
       pv.drop: true
       pv.break: true
+      pv.place: true
+      pv.version: true
+  -pv.*:
+    description: Gives access to all PlayerVisbility commands
+    children:
+      pv.enable: false
+      pv.disable: false
+      pv.hide: false
+      pv.show: false
+      pv.toolon: false
+      pv.tooloff: false
+      pv.reload: false
+      pv.setdisplaynameon: false
+      pv.setdisplaynameoff: false
+      pv.setmessage: false
+      pv.torch.hide: false
+      pv.torch.show: false
+      pv.byepass: false
+      pv.pick: false
+      pv.drop: false
+      pv.break: false
+      pv.place: false
+      pv.version: false
   pv.enable:
     description: You can enable the plugin.
     default: op
@@ -100,7 +125,7 @@ permissions:
       pv.torch.show: true
   pv.byepass:
     description: Players byepasses the time between clicks.
-    default: false
+    default: op
   pv.pick:
     description: Player can pickup items in the hub.
     default: true
@@ -109,4 +134,7 @@ permissions:
     default: true
   pv.break:
     description: Player can break blocks in the hub.
+    default: true
+  pv.place:
+    description: Player can place blocks in the hub.
     default: true
