@@ -1,23 +1,36 @@
-#Config for Player Visibility by 1Tudor1
-#The materials can be found here: http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html
-#You can get the colors from here: https://github.com/1Tudor1/GitHubPlugins/blob/master/ColorCodes_PlayerVisibility
-# %timeDelay% is replaced with the time left to the next click
+# Config for Player Visibility by 1Tudor1
+# The materials can be found here: http://goo.gl/qJVLlE
+# You can get the colors from here: http://goo.gl/m6xrq2
 PlayerVisibility:
+# The item material when players are hide
   itemMaterialON: REDSTONE_TORCH_ON
+# The item material when players are shown
   itemMaterialOFF: LEVER
+# The amount for how much of the material should be
   amount: 1
+# Don't touch this :D
   shrt: 0
+# This is the time in seconds until the player can click again
   timeDelay: 5
+# This is the name of the item when players are shown
   displayNameON: '&2Players &7>> &2Enabled'
+# This is the name of the item when players are hidden
   displayNameOFF: '&2Players &7>> &4Disabled'
+# This is the world where the player gets the toggler
 worldToGetItem:
   world: hub
 messages:
+# The message when the player shows the players
   visibilityActivated: '&8[&eVisibility&8] You have toggled player visibility: &2on'
+# The message when the player hides the players
   visibilityDeactivated: '&8[&eVisibility&8] You have toggled player visibility: &4off'
+# The message which tells the player how much time should wait
+# %timeDelay% will be replaced with the time from 'timeDelay'
   timerMessage: '&ePlease wait %timeDelay% seconds before using the Torch!'
+# This message is if the player hasn't the permisson to do something
   noPermMessage: "&cYou don't have the permission to use the torch!"
 miscellaneous:
+#If you want to show the debug set it to true
   debug: false
 #When pluginOn = true the player on join has the gamemode set to adventure and gets the torch
   pluginOn: true
