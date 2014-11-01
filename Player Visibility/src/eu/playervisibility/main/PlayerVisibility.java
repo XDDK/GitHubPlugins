@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -31,59 +32,80 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class PlayerVisibility extends JavaPlugin implements Listener {
 
-	public boolean pluginOn = false;
+	public boolean pluginOn = true;
 	Map<String, Long> intervaleAsteptateDeCatreJucatori = new HashMap<String, Long>();
-	
+	private boolean debug = false;
+
 	public final Logger logger = Logger.getLogger("Minecraft");
 	public static PlayerVisibility plugin;
-	
+
 	@Override
 	public void onEnable() {
-		if(!new File(this.getDataFolder(), "config.yml").exists()){
+		if (!new File(this.getDataFolder(), "config.yml").exists()) {
 			this.saveDefaultConfig();
 		}
-		
+
 		PluginDescriptionFile pdfFile = this.getDescription();
 		this.logger.info(pdfFile.getName() + " Version " + pdfFile.getVersion() + " has been enabled!");
 		getServer().getPluginManager().registerEvents(this, this);
 		loadConfig();
+		pluginOn = getConfig().getBoolean("miscellaneous.pluginOn");
+		debug = getConfig().getBoolean("miscellaneous.debug");
 	}
-	
+
 	@Override
 	public void onDisable() {
 		loadConfig();
 	}
-	
-    public void loadConfig()
-    {
-        FileConfiguration cfg = getConfig();
-        cfg.options().copyDefaults(true);
-        cfg.options().copyHeader(true);
-        saveConfig();
-    }
-    
-    String matON = getConfig().getString("PlayerVisibility.itemMaterialON");
-    String matOFF = getConfig().getString("PlayerVisibility.itemMaterialOFF");
-    
+
+	public void loadConfig() {
+		FileConfiguration cfg = getConfig();
+		cfg.options().copyDefaults(true);
+		cfg.options().copyHeader(true);
+		saveConfig();
+	}
+
+	String matON = getConfig().getString("PlayerVisibility.itemMaterialON");
+	String matOFF = getConfig().getString("PlayerVisibility.itemMaterialOFF");
+
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
-		if (pluginOn = true) {
-			if (player.getInventory().contains(makeVanishItem(Material.valueOf(matON) , getConfig().getInt("PlayerVisibility.amount"), getConfig().getInt("PlayerVisibility.shrt"), ColorService.replaceCodeWithCorrectColor(getConfig().getString("PlayerVisibility.displayNameON")))) ||
-					player.getInventory().contains(makeVanishItem(Material.valueOf(matOFF) , getConfig().getInt("PlayerVisibility.amount"), getConfig().getInt("PlayerVisibility.shrt"), ColorService.replaceCodeWithCorrectColor(getConfig().getString("PlayerVisibility.displayNameOFF"))))) {
-				player.getInventory().clear();
-				showAllPlayers(player);
-				player.getInventory().addItem(makeVanishItem(Material.valueOf(matON), getConfig().getInt("PlayerVisibility.amount"), getConfig().getInt("PlayerVisibility.shrt"), ColorService.replaceCodeWithCorrectColor(getConfig().getString("PlayerVisibility.displayNameON"))));
-			} else {
-				showAllPlayers(player);
-				player.getInventory().addItem(makeVanishItem(Material.valueOf(matON), getConfig().getInt("PlayerVisibility.amount"), getConfig().getInt("PlayerVisibility.shrt"), ColorService.replaceCodeWithCorrectColor(getConfig().getString("PlayerVisibility.displayNameON"))));
+		
+		String worldFromConfig = getConfig().getString("worldToGetItem.world");
+		String currentWorld = player.getWorld().getName();
+		if (debug) {
+			System.out.println("[DEBUG] World we have set in the config.yml " + worldFromConfig);
+			System.out.println("[DEBUG] Current world of the player(on join) " + currentWorld);
+		}
+		if (worldFromConfig.equals(currentWorld)) {
+			if(debug){
+				System.out.println("[DEBUG] The player is in the specified world!");
+			}
+			if (pluginOn = true) {
+				player.setGameMode(GameMode.ADVENTURE);
+				if (player.getInventory().contains(makeVanishItem(Material.valueOf(matON), getConfig().getInt("PlayerVisibility.amount"), getConfig().getInt("PlayerVisibility.shrt"), ColorService.replaceCodeWithCorrectColor(getConfig().getString("PlayerVisibility.displayNameON")))) || player.getInventory().contains(makeVanishItem(Material.valueOf(matOFF), getConfig().getInt("PlayerVisibility.amount"), getConfig().getInt("PlayerVisibility.shrt"), ColorService.replaceCodeWithCorrectColor(getConfig().getString("PlayerVisibility.displayNameOFF"))))) {
+					player.getInventory().clear();
+					showAllPlayers(player);
+					player.getInventory().addItem(makeVanishItem(Material.valueOf(matON), getConfig().getInt("PlayerVisibility.amount"), getConfig().getInt("PlayerVisibility.shrt"), ColorService.replaceCodeWithCorrectColor(getConfig().getString("PlayerVisibility.displayNameON"))));
+				} else {
+					showAllPlayers(player);
+					player.getInventory().addItem(makeVanishItem(Material.valueOf(matON), getConfig().getInt("PlayerVisibility.amount"), getConfig().getInt("PlayerVisibility.shrt"), ColorService.replaceCodeWithCorrectColor(getConfig().getString("PlayerVisibility.displayNameON"))));
+				}
+			}
+		} else {
+			if(debug){
+				System.out.println("[DEBUG] Not in the specified world!");
 			}
 		}
 	}
 
 	public void hideAllPlayers(Player player) {
 		for (Player p : Bukkit.getOnlinePlayers()) {
-			player.hidePlayer(p);
+			boolean playerWithPerm = p.hasPermission("pv.isHideable");
+			if(playerWithPerm){ // if player has pv.isHideable permission, hide player
+				p.hidePlayer(p);
+			}
 		}
 	}
 
@@ -93,44 +115,44 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		}
 	}
 
-	public static String stringFromArguments(String[] argumente, int inceput, int numarArgumenteMinim, Player player) throws InsufficientArgumentsException{
+	public static String stringFromArguments(String[] argumente, int inceput, int numarArgumenteMinim, Player player) throws InsufficientArgumentsException {
 		StringBuilder sb = new StringBuilder();
-	
-		if(argumente.length < numarArgumenteMinim){
+
+		if (argumente.length < numarArgumenteMinim) {
 			throw new InsufficientArgumentsException();
-		}else{
-		
-			for (int i = inceput; i < argumente.length; i++){
+		} else {
+
+			for (int i = inceput; i < argumente.length; i++) {
 				sb.append(argumente[i]);
 				sb.append(" ");
 			}
 		}
 		return sb.toString().trim();
-		
+
 	}
-	
+
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (!(sender instanceof Player)) {
 			sender.sendMessage(ChatColor.DARK_RED + "You can only do this as a player!");
 			return false;
 		}
 		Player player = (Player) sender;
-        if(label.equalsIgnoreCase("pvenable")){
-        	if(player.hasPermission("pv.enable") || player.isOp()){
-        		pluginOn = true;
-        		player.sendMessage(ChatColor.GREEN + "Ai activat plugin-ul de vizibilitate");
-        	} else {
-        		player.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
-        	}
-        }
-        if(label.equalsIgnoreCase("pvdisable")){
-        	if(player.hasPermission("pv.disable") || player.isOp()){
-        		pluginOn = false;
-        		player.sendMessage(ChatColor.RED + "Ai dezactivat plugin-ul de vizibilitate");
-        	} else {
-        		player.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
-        	}
-        }
+		if (label.equalsIgnoreCase("pvenable")) {
+			if (player.hasPermission("pv.enable") || player.isOp()) {
+				pluginOn = true;
+				player.sendMessage(ChatColor.GREEN + "Ai activat plugin-ul de vizibilitate");
+			} else {
+				player.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
+			}
+		}
+		if (label.equalsIgnoreCase("pvdisable")) {
+			if (player.hasPermission("pv.disable") || player.isOp()) {
+				pluginOn = false;
+				player.sendMessage(ChatColor.RED + "Ai dezactivat plugin-ul de vizibilitate");
+			} else {
+				player.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
+			}
+		}
 		if (label.equalsIgnoreCase("pvhide") || label.equalsIgnoreCase("playervisibilityshow")) {
 			if (player.hasPermission("pv.hide") || player.isOp()) {
 				hideAllPlayers(player);
@@ -148,7 +170,9 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		if (label.equalsIgnoreCase("pvtoolon") || label.equalsIgnoreCase("playervisibilitytoolon")) {
 			if (player.hasPermission("pv.toolon") || player.isOp()) {
 				Player p = player.getPlayer();
-				p.getInventory().addItem(makeVanishItem(Material.valueOf(matON), getConfig().getInt("PlayerVisibility.amount"), getConfig().getInt("PlayerVisibility.shrt"), ColorService.replaceCodeWithCorrectColor(getConfig().getString("PlayerVisibility.displayNameON"))));//ChatColor.GOLD + getConfig().getString("PlayerVisibility.displayNameON")));
+				p.getInventory().addItem(makeVanishItem(Material.valueOf(matON), getConfig().getInt("PlayerVisibility.amount"), getConfig().getInt("PlayerVisibility.shrt"), ColorService.replaceCodeWithCorrectColor(getConfig().getString("PlayerVisibility.displayNameON"))));// ChatColor.GOLD
+																																																																					// +
+																																																																					// getConfig().getString("PlayerVisibility.displayNameON")));
 			} else
 				player.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
 		}
@@ -159,16 +183,16 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 			} else
 				player.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
 		}
-		if(label.equalsIgnoreCase("pvreload")){
+		if (label.equalsIgnoreCase("pvreload")) {
 			if (player.hasPermission("pv.reload") || player.isOp()) {
 				this.reloadConfig();
 				this.saveConfig();
-			    System.out.println(ChatColor.GREEN + "Configuarion reloaded!");
-			    player.sendMessage(ChatColor.GREEN + "Configuarion reloaded!");
+				System.out.println(ChatColor.GREEN + "Configuarion reloaded!");
+				player.sendMessage(ChatColor.GREEN + "Configuarion reloaded!");
 			}
 		}
-		if(label.equalsIgnoreCase("setdisplaynameon")){
-			if(player.hasPermission("pv.setdisplaynameon") || player.isOp()){
+		if (label.equalsIgnoreCase("setdisplaynameon")) {
+			if (player.hasPermission("pv.setdisplaynameon") || player.isOp()) {
 				try {
 					this.getConfig().set("PlayerVisibility.displayNameON", stringFromArguments(args, 0, 1, player));
 					this.saveConfig();
@@ -179,8 +203,8 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 				}
 			}
 		}
-		if(label.equalsIgnoreCase("setdisplaynameoff")){
-			if(player.hasPermission("pv.setdisplaynameoff") || player.isOp()){
+		if (label.equalsIgnoreCase("setdisplaynameoff")) {
+			if (player.hasPermission("pv.setdisplaynameoff") || player.isOp()) {
 				try {
 					this.getConfig().set("PlayerVisibility.displayNameOFF", stringFromArguments(args, 0, 1, player));
 					this.saveConfig();
@@ -191,15 +215,15 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 				}
 			}
 		}
-		if(label.equalsIgnoreCase("setmessage")){
-			if(player.hasPermission("pv.setmessage") || player.isOp()){
+		if (label.equalsIgnoreCase("setmessage")) {
+			if (player.hasPermission("pv.setmessage") || player.isOp()) {
 				String typeOfMessage = args[0];
-				if(typeOfMessage.equals("visibilityactivated")){
+				if (typeOfMessage.equals("visibilityactivated")) {
 					try {
 						this.getConfig().set("messages.visibilityActivated", stringFromArguments(args, 1, 2, player));
 						this.saveConfig();
 						String msg = getConfig().getString("messages.visibilityActivated");
-						player.sendMessage(ChatColor.BLUE + "Message set: "+ ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
+						player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
 					} catch (InsufficientArgumentsException e) {
 						player.sendMessage(ChatColor.DARK_RED + "You can't set an invalid message!");
 					}
@@ -238,11 +262,11 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		return false;
 	}
 
-	public ItemStack makeVanishItem(Material material, int amount, int shrt, String displayName/*, List<String> lore*/) {
+	public ItemStack makeVanishItem(Material material, int amount, int shrt, String displayName/*,List<String>lore*/) {
 		ItemStack item = new ItemStack(material, amount, (short) shrt);
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(displayName);
-		/*meta.setLore(lore);*/
+		/* meta.setLore(lore); */
 		item.setItemMeta(meta);
 		return item;
 	}
@@ -276,7 +300,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 				intervaleAsteptateDeCatreJucatori.put(player.getName(), acum);
 			} else if ((acum - atunci) < timeDelay) {
 				String message = getConfig().getString("messages.timerMessage");
-				String timeLeftDelay = String.valueOf(timeDelay/1000);
+				String timeLeftDelay = String.valueOf(timeDelay / 1000);
 				player.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("%timeDelay%", timeLeftDelay)));
 			}
 		} else {
@@ -318,8 +342,8 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 			}
 		}
 	}
-	
-	//EVENTS
+
+	// EVENTS
 	@EventHandler
 	public void onPickupEvent(PlayerPickupItemEvent event) {
 
@@ -328,7 +352,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 			event.setCancelled(true);
 			player.sendMessage(ChatColor.YELLOW + "You are not permitted to pickup items!");
 		} else {
-			
+
 		}
 
 	}
@@ -341,7 +365,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 			event.setCancelled(true);
 			player.sendMessage(ChatColor.YELLOW + "You are not permitted to drop items!");
 		} else {
-			
+
 		}
 
 	}
@@ -353,18 +377,18 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		if (!(player.isOp() || player.hasPermission("pv.break"))) {
 			event.setCancelled(true);
 		} else {
-			
+
 		}
 	}
-	
+
 	@EventHandler
-	public void onBlockPlace(BlockPlaceEvent event){
-		
+	public void onBlockPlace(BlockPlaceEvent event) {
+
 		Player player = event.getPlayer();
 		if (!(player.isOp() || player.hasPermission("pv.place"))) {
 			event.setCancelled(true);
 		} else {
-			
+
 		}
 	}
 }
