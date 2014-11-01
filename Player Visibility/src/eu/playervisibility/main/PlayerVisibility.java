@@ -104,7 +104,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			boolean playerWithPerm = p.hasPermission("pv.isHideable");
 			if(playerWithPerm){ // if player has pv.isHideable permission, hide player
-				p.hidePlayer(p);
+				player.hidePlayer(p);
 			}
 		}
 	}
