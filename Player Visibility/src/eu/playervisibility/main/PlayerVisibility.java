@@ -71,7 +71,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
-		
+
 		String worldFromConfig = getConfig().getString("worldToGetItem.world");
 		String currentWorld = player.getWorld().getName();
 		if (debug) {
@@ -79,7 +79,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 			System.out.println("[DEBUG] Current world of the player(on join) " + currentWorld);
 		}
 		if (worldFromConfig.equals(currentWorld)) {
-			if(debug){
+			if (debug) {
 				System.out.println("[DEBUG] The player is in the specified world!");
 			}
 			if (pluginOn = true) {
@@ -94,7 +94,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 				}
 			}
 		} else {
-			if(debug){
+			if (debug) {
 				System.out.println("[DEBUG] Not in the specified world!");
 			}
 		}
@@ -103,7 +103,8 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 	public void hideAllPlayers(Player player) {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			boolean playerWithPerm = p.hasPermission("pv.isHideable");
-			if(playerWithPerm){ // if player has pv.isHideable permission, hide player
+			if (playerWithPerm) { // if player has pv.isHideable permission,
+									// hide player
 				player.hidePlayer(p);
 			}
 		}
@@ -131,6 +132,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 
 	}
 
+	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (!(sender instanceof Player)) {
 			sender.sendMessage(ChatColor.DARK_RED + "You can only do this as a player!");
@@ -262,7 +264,14 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		return false;
 	}
 
-	public ItemStack makeVanishItem(Material material, int amount, int shrt, String displayName/*,List<String>lore*/) {
+	public ItemStack makeVanishItem(Material material, int amount, int shrt, String displayName/*
+																								 * ,
+																								 * List
+																								 * <
+																								 * String
+																								 * >
+																								 * lore
+																								 */) {
 		ItemStack item = new ItemStack(material, amount, (short) shrt);
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(displayName);
