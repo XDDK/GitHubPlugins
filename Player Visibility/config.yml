@@ -6,6 +6,8 @@ PlayerVisibility:
   itemMaterialON: REDSTONE_TORCH_ON
 # The item material when players are shown
   itemMaterialOFF: LEVER
+# The slot in inventory
+  slot: 1
 # The amount for how much of the material should be
   amount: 1
 # Don't touch this :D
@@ -19,10 +21,14 @@ PlayerVisibility:
 # This is the world where the player gets the toggler
 worldToGetItem:
   world: hub
+# The worlds where the plugin is enabled. ex: if a player has players disabled and joins world he will not see the players.
+enabledWorlds:
+  - hub
+  - world
 messages:
-# The message when the player shows the players
+# The message when the player shows the players, set to null without '' for no message
   visibilityActivated: '&8[&eVisibility&8] You have toggled player visibility: &2on'
-# The message when the player hides the players
+# The message when the player hides the players, set to null without '' for no message
   visibilityDeactivated: '&8[&eVisibility&8] You have toggled player visibility: &4off'
 # The message which tells the player how much time should wait
 # %timeDelay% will be replaced with the time from 'timeDelay'
@@ -32,5 +38,5 @@ messages:
 miscellaneous:
 #If you want to show the debug set it to true
   debug: false
-#When pluginOn = true the player on join has the gamemode set to adventure and gets the torch
+#When pluginOn = true the player on join has the player gets the torch
   pluginOn: true
