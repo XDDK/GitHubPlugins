@@ -153,17 +153,17 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		if (label.equalsIgnoreCase("pvenable")) {
 			if (player.hasPermission("pv.enable") || player.isOp()) {
 				pluginOn = true;
-				player.sendMessage(ChatColor.GREEN + "Ai activat plugin-ul de vizibilitate");
+				player.sendMessage("§2You activated the Visibility plugin!");
 			} else {
-				player.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
+				player.sendMessage("§cYou don't have permission to use this command.");
 			}
 		}
 		if (label.equalsIgnoreCase("pvdisable")) {
 			if (player.hasPermission("pv.disable") || player.isOp()) {
 				pluginOn = false;
-				player.sendMessage(ChatColor.RED + "Ai dezactivat plugin-ul de vizibilitate");
+				player.sendMessage("§cYou deactivated the Visibility plugin!");
 			} else {
-				player.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
+				player.sendMessage("§cYou don't have permission to use this command.");
 			}
 		}
 		if (label.equalsIgnoreCase("pvhide") || label.equalsIgnoreCase("playervisibilityshow")) {
