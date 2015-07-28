@@ -209,11 +209,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		if (label.equalsIgnoreCase("setdisplaynameon")) {
 			if (player.hasPermission("pv.setdisplaynameon") || player.isOp()) {
 				try {
-					if (args.length > 1) {
-						this.getConfig().set("PlayerVisibility.displayNameON", stringFromArguments(args, 0, 1, player));
-					} else {
-						this.getConfig().set("PlayerVisibility.displayNameON", null);
-					}
+					this.getConfig().set("PlayerVisibility.displayNameON", stringFromArguments(args, 0, 1, player));
 					this.saveConfig();
 					String msg = getConfig().getString("PlayerVisibility.displayNameON");
 					player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
@@ -243,7 +239,11 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 				String typeOfMessage = args[0];
 				if (typeOfMessage.equals("visibilityactivated")) {
 					try {
-						this.getConfig().set("messages.visibilityActivated", stringFromArguments(args, 1, 2, player));
+						if (args.length > 1) {
+							this.getConfig().set("messages.visibilityActivated", stringFromArguments(args, 1, 2, player));
+						} else {
+							this.getConfig().set("messages.visibilityActivated", null);
+						}
 						this.saveConfig();
 						String msg = getConfig().getString("messages.visibilityActivated");
 						player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
@@ -252,7 +252,11 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 					}
 				} else if (typeOfMessage.equals("visibilitydeactivated")) {
 					try {
-						this.getConfig().set("messages.visibilityDeactivated", stringFromArguments(args, 1, 2, player));
+						if (args.length > 1) {
+							this.getConfig().set("messages.visibilityDeactivated", stringFromArguments(args, 1, 2, player));
+						} else {
+							this.getConfig().set("messages.visibilityDeactivated", null);
+						}
 						this.saveConfig();
 						String msg = getConfig().getString("messages.visibilityDeactivated");
 						player.sendMessage(ChatColor.BLUE + "Message set: " + ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', msg));
@@ -355,7 +359,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		if (player.getItemInHand().equals(makeVanishItem(Material.valueOf(matON), getConfig().getInt("PlayerVisibility.amount"), getConfig().getInt("PlayerVisibility.shrt"), ColorService.replaceCodeWithCorrectColor(getConfig().getString("PlayerVisibility.displayNameON"))))) {
 			if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 				if (player.hasPermission("pv.torch.hide") || player.isOp()) {
-					if (player.hasPermission("pv.byepass") || player.isOp()) {
+					if (player.hasPermission("pv.bypass") || player.isOp()) {
 						hide(player);
 					} else {
 						asteptare(player, true);
@@ -366,7 +370,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		} else if (player.getItemInHand().equals(makeVanishItem(Material.valueOf(matOFF), getConfig().getInt("PlayerVisibility.amount"), getConfig().getInt("PlayerVisibility.shrt"), ColorService.replaceCodeWithCorrectColor(getConfig().getString("PlayerVisibility.displayNameOFF"))))) {
 			if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 				if (player.hasPermission("pv.torch.show") || player.isOp()) {
-					if (player.hasPermission("pv.byepass") || player.isOp()) {
+					if (player.hasPermission("pv.bypass") || player.isOp()) {
 						show(player);
 					} else {
 						asteptare(player, false);

@@ -49,8 +49,8 @@ permissions:
     children:
       pv.enable: true
       pv.disable: true
-      pv.hide: true
-      pv.show: true
+      pv.torch.hide: true
+      pv.torch.show: true
       pv.toolon: true
       pv.tooloff: true
       pv.reload: true
@@ -59,7 +59,7 @@ permissions:
       pv.setmessage: true
       pv.torch.hide: true
       pv.torch.show: true
-      pv.byepass: true
+      pv.bypass: true
       pv.pick: true
       pv.drop: true
       pv.break: true
@@ -81,7 +81,7 @@ permissions:
       pv.setmessage: false
       pv.torch.hide: false
       pv.torch.show: false
-      pv.byepass: false
+      pv.bypass: false
       pv.pick: false
       pv.drop: false
       pv.break: false
@@ -94,10 +94,10 @@ permissions:
   pv.disable:
     description: You can disable the plugin.
     default: op
-  pv.hide:
+  pv.torch.hide:
     description: You can hide the players with command.
     default: true
-  pv.show:
+  pv.torch.show:
     description: You can show the players with command.
     default: true
   pv.toolon:
@@ -124,7 +124,7 @@ permissions:
     children:
       pv.torch.hide: true
       pv.torch.show: true
-  pv.byepass:
+  pv.bypass:
     description: Players byepasses the time between clicks.
     default: op
   pv.pick:
