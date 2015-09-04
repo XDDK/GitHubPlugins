@@ -1,118 +1,53 @@
 name: PlayerVisibility
 main: eu.playervisibility.main.PlayerVisibility
-version: 1.3.0 Release
+version: 1.3.3 Release
 description: This plugin enables/disables player visibility in the hub server.
-author: 1Tudor1
+authors: [1Tudor1, xDesireRage]
 website: http://dev.bukkit.org/bukkit-plugins/player-visibilitytoggle/
 commands:
     pv:
-        description: Show the help of Player Visibility.
+        description: Main Player Visibility command.
         aliases: [playervisibility]
-        usage:  |
-             /<command> <parameters>
-    pvversion:
-        description: Show the help of Player Visibility.
-        aliases: [playervisibilityversion, pvver]
-        permission: pv.version
-        usage:  |
-             Version of the plugin is 1.2.17 Release
-    pvhide:
-        aliases: [playervisibilityhide]
-        description: Hide all the players.
-    pvshow:
-        aliases: [playervisibilityshow]
-        description: Show all the players.
-    pvtoolon:
-        aliases: [playervisibilitytoolon]
-        description: Give to the player the magic tool on.
-    pvtooloff:
-        aliases: [playervisibilitytooloff]
-        description: Give to the player the magic tool off.
-    pvenable:
-        description: Activate the plugin.
-    pvdisable:
-        description: Deactivate the plugin.
-    pvreload:
-        description: Reload the plugin.
-    setdisplaynameon:
-        aliases: [setdpon, setdisplayon]
-        description: Sets a new displayname when the torch is on.
-    setdisplaynameoff:
-        aliases: [setdpoff, setdisplayoff]
-        description: Sets a new displayname when the torch is off.
-    setmessage:
-        aliases: [setm, setmsg]
-        description: Sets a new message on any message of the plugin.
 permissions:
   pv.*:
-    description: Gives access to all PlayerVisbility commands
+    description: Gives access to all PlayerVisbility permissions
     children:
-      pv.enable: true
-      pv.disable: true
       pv.torch.hide: true
       pv.torch.show: true
-      pv.toolon: true
-      pv.tooloff: true
+      pv.tool: true
       pv.reload: true
-      pv.setdisplaynameon: true
-      pv.setdisplaynameoff: true
+      pv.setdisplayname: true
       pv.setmessage: true
-      pv.torch.hide: true
-      pv.torch.show: true
       pv.bypass: true
-      pv.pick: true
-      pv.drop: true
-      pv.break: true
-      pv.place: true
-      pv.version: true
-      pv.isHideable: false
+      pv.nonHideable: true
   -pv.*:
-    description: Gives access to all PlayerVisbility commands
+    description: Deny access to all PlayerVisbility permissions
     children:
-      pv.enable: false
-      pv.disable: false
-      pv.hide: false
-      pv.show: false
-      pv.toolon: false
-      pv.tooloff: false
-      pv.reload: false
-      pv.setdisplaynameon: false
-      pv.setdisplaynameoff: false
-      pv.setmessage: false
       pv.torch.hide: false
       pv.torch.show: false
+      pv.tool: false
+      pv.reload: false
+      pv.setdisplayname: false
+      pv.setmessage: false
       pv.bypass: false
-      pv.pick: false
-      pv.drop: false
-      pv.break: false
-      pv.place: false
-      pv.version: false
-      pv.isHideable: true
-  pv.enable:
-    description: You can enable the plugin.
-    default: op
-  pv.disable:
-    description: You can disable the plugin.
-    default: op
+      pv.denypick: true
+      pv.denydrop: true
+      pv.denybreak: true
+      pv.denyplace: true
+      pv.nonHideable: false
   pv.torch.hide:
     description: You can hide the players with command.
     default: true
   pv.torch.show:
     description: You can show the players with command.
     default: true
-  pv.toolon:
-    description: You get the tool for shown players.
-    default: op
-  pv.tooloff:
+  pv.tool:
     description: You get the tool for hidden players.
     default: op
   pv.reload:
     description: You cand reload the plugin config.
     default: op
-  pv.setdisplaynameon:
-    description: Set the display name for the toggleon item.
-    default: op
-  pv.setdisplaynameoff:
+  pv.setdisplayname:
     description: Set the disaplay name for the toggleoff item.
     default: op
   pv.setmessage:
@@ -125,20 +60,8 @@ permissions:
       pv.torch.hide: true
       pv.torch.show: true
   pv.bypass:
-    description: Players byepasses the time between clicks.
+    description: Players bypasses the time between clicks.
     default: op
-  pv.pick:
-    description: Player can pickup items in the hub.
-    default: true
-  pv.drop:
-    description: Player can drop items in the hub.
-    default: true
-  pv.break:
-    description: Player can break blocks in the hub.
-    default: true
-  pv.place:
-    description: Player can place blocks in the hub.
-    default: true
-  pv.isHideable:
+  pv.nonHideable:
     description: Player is hidable and other players can see him.
-    default: true
+    default: op

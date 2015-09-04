@@ -1,42 +1,36 @@
-# Config for Player Visibility by 1Tudor1
+# Config for Player Visibility by xDesireRage
 # The materials can be found here: http://goo.gl/qJVLlE
 # You can get the colors from here: http://goo.gl/m6xrq2
 PlayerVisibility:
-# The item material when players are hide
-  itemMaterialON: REDSTONE_TORCH_ON
-# The item material when players are shown
-  itemMaterialOFF: LEVER
-# The slot in inventory
+# The item material when players are hide (material amount damage)
+  itemON: REDSTONE_TORCH_ON 1 0
+# The item when players are shown (material amount damage)
+  itemOFF: LEVER 1 0
+# The slot in inventory to get the item
   slot: 1
-# The amount for how much of the material should be
-  amount: 1
-# Don't touch this :D
-  shrt: 0
 # This is the time in seconds until the player can click again
   timeDelay: 5
 # This is the name of the item when players are shown
-  displayNameON: '&2Players &7>> &2Enabled'
+  displayNameON: '&2Players &7» &2Enabled'
 # This is the name of the item when players are hidden
-  displayNameOFF: '&2Players &7>> &4Disabled'
+  displayNameOFF: '&2Players &7» &4Disabled'
 # This is the world where the player gets the toggler
 worldToGetItem:
-  world: hub
+  world: world
 # The worlds where the plugin is enabled. ex: if a player has players disabled and joins world he will not see the players.
 enabledWorlds:
-  - hub
   - world
+  - hub
 messages:
-# The message when the player shows the players, set to null without '' for no message
-  visibilityActivated: '&8[&eVisibility&8] You have toggled player visibility: &2on'
-# The message when the player hides the players, set to null without '' for no message
-  visibilityDeactivated: '&8[&eVisibility&8] You have toggled player visibility: &4off'
-# The message which tells the player how much time should wait
-# %timeDelay% will be replaced with the time from 'timeDelay'
-  timerMessage: '&ePlease wait %timeDelay% seconds before using the Torch!'
-# This message is if the player hasn't the permisson to do something
-  noPermMessage: "&cYou don't have the permission to use the torch!"
+  consoleDeny: "&8[&6Visibility&8] &cYou cannot execute commands from console!"
+  visibilityActivated: "&8[&6Visibility&8] &7You have toggled player visibility: &2on"
+  visibilityDeactivated: "&8[&6Visibility&8] &7You have toggled player visibility: &4off"
+  delay: "&8[&6Visibility&8] &cPlease wait &4%time% &cseconds before using the Torch!"
+  noPerm: "&8[&6Visibility&8] &cYou don't have the permission to to this!"
+  invalidCmd: "&8[&6Visibility&8] &cYou typed an invalid command."
+  configReloaded: "&8[&6Visibility&8] &2Successfully reloaded config!"
+  displayNameSet: "&8[&6Visibility&8] &2Display name %type% set to &8» %args%"
+  messageSet: "&8[&6Visibility&8] &2Message %type% set to &8» %args%"
 miscellaneous:
-#If you want to show the debug set it to true
-  debug: false
-#When pluginOn = true the player on join has the player gets the torch
-  pluginOn: true
+#On join, the player gets the torch
+  joinTorch: true
