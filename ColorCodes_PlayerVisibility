@@ -1,26 +1,24 @@
-!!ATTENTION!! This is just for the 'displayName'
-The color codes for the player visibility plugin:
-================================================
-=  &0  = ChatColor.BLACK;                      =
-=  &1  = ChatColor.DARK_BLUE;                  =
-=  &2  = ChatColor.DARK_GREEN;                 =
-=  &3  = ChatColor.DARK_AQUA;                  =
-=  &4  = ChatColor.DARK_RED;                   =
-=  &5  = ChatColor.DARK_PURPLE;                =
-=  &6  = ChatColor.GOLD;                       =
-=  &7  = ChatColor.GRAY;                       =
-=  &8  = ChatColor.DARK_GRAY;                  =
-=  &9  = ChatColor.BLUE;                       =
-=  &a = ChatColor.GREEN;                      =
-=  &b = ChatColor.AQUA;                       =
-=  &c = ChatColor.RED;                        =
-=  &d = ChatColor.LIGHT_PURPLE;               =
-=  &e = ChatColor.YELLOW;                     =
-=  &f = ChatColor.WHITE;                      =
-=  &k = ChatColor.MAGIC;                      =
-=  &l = ChatColor.BOLD;                       =
-=  &m = ChatColor.STRIKETHROUGH;              =
-=  &n = ChatColor.UNDERLINE;                  =
-=  &o = ChatColor.ITALIC;                     =
-=  &r = ChatColor.RESET;                      =
-================================================
+»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»
+» &0  » BLACK                      »
+» &1  » DARK_BLUE                  »
+» &2  » DARK_GREEN                 »
+» &3  » DARK_AQUA                  »
+» &4  » DARK_RED                   »
+» &5  » DARK_PURPLE                »
+» &6  » GOLD                       »
+» &7  » GRAY                       »
+» &8  » DARK_GRAY                  »
+» &9  » BLUE                       »
+» &a  » GREEN                      »
+» &b  » AQUA                       »
+» &c  » RED                        »
+» &d  » LIGHT_PURPLE               »
+» &e  » YELLOW                     »
+» &f  » WHITE                      »
+» &k  » MAGIC                      »
+» &l  » BOLD                       »
+» &m  » STRIKETHROUGH              »
+» &n  » UNDERLINE                  »
+» &o  » ITALIC                     »
+» &r  » RESET                      »
+»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»
