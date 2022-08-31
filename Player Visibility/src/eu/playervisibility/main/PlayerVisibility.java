@@ -3,8 +3,8 @@ package eu.playervisibility.main;
 import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
-/*import java.util.Arrays;*/
-/*import java.util.List;*/
+//import java.util.Arrays;
+//import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -364,7 +364,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		Player player = event.getPlayer();
 		if (!player.isOp() || player.hasPermission("pv.denypick")) {
 			event.setCancelled(true);
-			player.sendMessage("§8[§6!§8] §cYou are not permitted to pickup items!");
+			player.sendMessage("Â§8[Â§6!Â§8] Â§cYou are not permitted to pickup items!");
 		}
 	}
 
@@ -373,7 +373,7 @@ public class PlayerVisibility extends JavaPlugin implements Listener {
 		Player player = event.getPlayer();
 		if (!player.isOp() || player.hasPermission("pv.denydrop")) {
 			event.setCancelled(true);
-			player.sendMessage("§8[§6!§8] §cYou are not permitted to drop items!");
+			player.sendMessage("Â§8[Â§6!Â§8] Â§cYou are not permitted to drop items!");
 		}
 	}
 
